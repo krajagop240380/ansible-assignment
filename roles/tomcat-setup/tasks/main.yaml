@@ -38,7 +38,7 @@
 
     - name: Extract from tat.gz and Place into /opt/app/tomcat
       unarchive:
-        src: "/opt/apache-tomcat-8.5.72.tar.gz"
+        src: "/opt/apache-tomcat-8.5.73.tar.gz"
         dest: "/opt/app/tomcat"
         remote_src: yes
 
@@ -53,7 +53,7 @@
     - name: copy tomcat-users.xml
       template:
         src: tomcat-users.xml.j2
-        dest: "/opt/app/tomcat/apache-tomcat-8.5.72/conf/tomcat-users.xml"
+        dest: "/opt/app/tomcat/apache-tomcat-8.5.73/conf/tomcat-users.xml"
         owner: "admin"
         group: "admin"
         mode: '0644'
@@ -62,7 +62,7 @@
     - name: copy context.xml
       template:
         src: context.xml.j2
-        dest: "/opt/app/tomcat/apache-tomcat-8.5.72/webapps/manager/META-INF/context.xml"
+        dest: "/opt/app/tomcat/apache-tomcat-8.5.73/webapps/manager/META-INF/context.xml"
         owner: "admin"
         group: "admin"
         mode: '0644'
