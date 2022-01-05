@@ -1,0 +1,7 @@
+---
+- name: tomcat automation
+  hosts: app
+  become: yes
+  become_method: sudo
+  roles:
+    - jenkins-setup
