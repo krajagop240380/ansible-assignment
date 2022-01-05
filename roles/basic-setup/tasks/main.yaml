@@ -1,0 +1,7 @@
+---
+
+- name: Install basic packages
+  package:
+    name: ['tree','git']
+    state: present
+    update_cache: yes

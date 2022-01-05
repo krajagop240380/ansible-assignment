@@ -6,66 +6,67 @@
   tasks:
     - name:  Install OpenJdk 8
       apt:
-        name: [ 'java-1.8.0-openjdk', 'java-1.8.0-openjdk-devel', 'git' ]
+        name: openjdk-8-jdk
         state: present
+        update_cache: yes
 
     - name: Create User Admin
       user:
-        name: "admin"
-        comment: "admin"
-        home: "/opt/app"
-        shell: "/bin/nologin"
+        name: admin
+        comment: admin
+        home: /opt/app
+        shell: /bin/nologin
         state: present
 
     - name: Create Group Admin
       group:
-        name: "admin"
+        name: admin
         state: present
 
     - name: Create App Dir
       file:
-        path: "/opt/app/tomcat"
+        path: /opt/app/tomcat
         state: directory
-        mode: "0755"
-        owner: "admin"
-        group: "admin"
+        mode: 0755
+        owner: admin
+        group: admin
 
     - name: Download Tomcat
       get_url:
-        url: "https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz"
-        dest: "/opt"
-        mode: "0440"
+        url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.73/bin/apache-tomcat-8.5.73.tar.gz
+        dest: /opt
+        mode: 0440
 
     - name: Extract from tat.gz and Place into /opt/app/tomcat
       unarchive:
-        src: "/opt/apache-tomcat-8.5.73.tar.gz"
-        dest: "/opt/app/tomcat"
+        src: /opt/apache-tomcat-8.5.73.tar.gz
+        dest: /opt/app/tomcat
         remote_src: yes
 
     - name: Change Ownership
       file:
-        path: "/opt/app"
+        path: /opt/app
         state: directory
         recurse: yes
-        owner: "admin"
-        group: "admin"
+        owner: admin
+        group: admin
 
     - name: copy tomcat-users.xml
       template:
         src: tomcat-users.xml.j2
-        dest: "/opt/app/tomcat/apache-tomcat-8.5.73/conf/tomcat-users.xml"
-        owner: "admin"
-        group: "admin"
-        mode: '0644'
+        dest: /opt/app/tomcat/apache-tomcat-8.5.73/conf/tomcat-users.xml
+        owner: admin
+        group: admin
+        mode: 0644
       notify: restart tomcat
 
     - name: copy context.xml
       template:
         src: context.xml.j2
-        dest: "/opt/app/tomcat/apache-tomcat-8.5.73/webapps/manager/META-INF/context.xml"
-        owner: "admin"
-        group: "admin"
-        mode: '0644'
+        dest: /opt/app/tomcat/apache-tomcat-8.5.73/webapps/manager/META-INF/context.xml
+        owner: admin
+        group: admin
+        mode: 0644
       notify: restart tomcat
 
     - name: copy tomcat service file
@@ -74,7 +75,7 @@
         dest: /etc/systemd/system/tomcat.service
         owner: root
         group: root
-        mode: '0755'
+        mode: 0755
       notify: restart tomcat
 
     - name: Start and enable tomcat service
