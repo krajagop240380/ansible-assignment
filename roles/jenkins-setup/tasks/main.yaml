@@ -1,21 +1,18 @@
 ---
 
-- name:  Get Jenkins release
-  get_url:
-    url: https://pkg.jenkins.io/debian/jenkins.repo
-    dest: /etc/apt/jenkins.repo
-
-- name: Import jenkins key from url
-  ansible.builtin.rpm_key:
+- name:  Jenkins Repository key
+  apt_key:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
     state: present
-    key: https://pkg.jenkins.io/debian/jenkins.io.key
-
-- name: Install jenkins
+- name:  Configure Jenkins Repository
+  apt_repository:
+    rep: 'deb https://pkg.jenkins.io/debian-stable binary/'
+    state: present
+- name:  Install jenkins
   apt:
     name: jenkins
-    state: latest
-
-- name: Start jenkins
-  ansible.builtin.systemd:
-   name: jenkins
-   state: started
+    update_cache: yes
+- name:  Start Jenkins
+  service:
+    name: jenkins
+    state: started
