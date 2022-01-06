@@ -1,0 +1,8 @@
+---
+
+- name: install jdk
+  apt:
+    name: openjdk-8-jdk
+    state: present
+    update_cache: yes
+  when: "'apache2' in ansible_facts.packages"
