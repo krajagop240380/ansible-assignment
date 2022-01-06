@@ -1,8 +1,14 @@
 ---
 - name: tomcat automation
-  hosts: app
+  hosts: apache
   become: yes
   become_method: sudo
   roles:
     - apache-setup
+
+- name: Nginx automation
+  hosts: nginx
+  become: yes
+  become_method: sudo
+  roles:
     - nginx-setup
