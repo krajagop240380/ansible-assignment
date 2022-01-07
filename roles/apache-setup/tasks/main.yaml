@@ -5,6 +5,13 @@
     name: apache2
     update_cache: yes
     state: latest
+
+- name:  Copy Index Html File
+  copy:
+    src: /files/index.html
+    dest: /var/www/html
+  notify: restart apache
+
 - name:  Start Apache
   service:
     name: apache2
