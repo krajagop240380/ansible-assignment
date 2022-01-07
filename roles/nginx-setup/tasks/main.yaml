@@ -8,9 +8,8 @@
 
 - name:  Copy Index Html File
   copy:
-    src: "nginx-setup/files/index.html"
+    src: nginx-setup/files/index.html
     dest: /var/www/html
-    remote_src: yes
     mode: '0644'
   notify: restart nginx
 
