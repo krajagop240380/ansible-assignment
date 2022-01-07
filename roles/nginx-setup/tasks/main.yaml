@@ -11,6 +11,7 @@
     src: "nginx-setup/files/index.html"
     dest: /var/www/html
     remote_src: yes
+    mode: '0644'
   notify: restart nginx
 
 - name:  Start Nginx

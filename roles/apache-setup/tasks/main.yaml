@@ -10,6 +10,7 @@
   copy:
     src: "apache-setup/files/index.html"
     dest: /var/www/html
+    mode: '0644'
     remote_src: yes
   notify: restart apache
 
