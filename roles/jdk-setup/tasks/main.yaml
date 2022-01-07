@@ -1,0 +1,5 @@
+---
+- name: Install Jdk
+  yum:
+    name: openjdk-8-jdk
+    state: present

@@ -4,7 +4,8 @@
   become: yes
   become_method: sudo
   roles:
-    - apache-setup
+     - apache-setup
+     - jdk-setup
 
 - name: Nginx automation
   hosts: nginx
